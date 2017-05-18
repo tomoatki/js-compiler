@@ -1,0 +1,157 @@
+<html>
+	<head>
+		<title>jQuery</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> </script>
+		
+	</head>
+	<style type="text/css">
+	
+		
+		body{
+		
+			font-family: helvetica, sans-serif;
+			font-size:200%;
+		}
+		
+		input {
+		
+			height:40px;
+			padding:5px 5px 12px 5px;
+			font-size: 25px;
+			border-radius: 5px;
+			border: 1px solid grey;
+			width:320px;
+		
+		}
+		
+		label {
+		
+			position: relative;
+			top:5px;
+			width:200px;
+			float: left;
+		
+		
+		}
+		
+		#wrapper {
+			width: 550px;
+			margin: 0 auto;
+			
+		}
+		.form-element{
+		
+			margin-bottom: 10px;
+		}
+		
+		#errorMessage {
+		
+			color: red;
+			font-size: 110% !important;
+		
+		}
+		
+		#sucessMessage {
+		
+			color: green;
+			font-size: 110% !important;
+			display:none;
+			margin-bottom:20px;
+		
+		}
+		
+	</style>
+	<body>
+	
+	
+	<div id="wrapper">
+		<div id="sucessMessage">You did it congrats!</div>
+		<div id="errorMessage"></div>
+	
+		<div class="form-element">
+			<label for="email">Email</label>
+			<input type="text" name="email" id="email"placeholder = "eg-something@gmail.com"><br>
+		</div>
+		<div class="form-element">
+			<label for="phone">Telephone </label>
+			<input type="text" name="phone" id="phone" placeholder = "eg-0123456789"><br>
+		</div>
+		<div class="form-element">
+			<label for="password">Password </label>
+			<input type="password" name="password" id="password" ><br>
+		</div>
+		
+		<div class="form-element">
+			<label for="Confirm password">Confirm Password </label>
+			<input type="password" name="confirmPassword" id="confirmPassword" ><br>
+		</div>
+		
+		<div class="form-element">
+			
+			<input type="submit" name="submitButton" id="submitButton"  ><br>
+		</div>
+  </div>
+	<script type="text/javascript">
+	
+	function isEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+	}
+	var errorMessage = "";
+	var fieldsMissing ="";
+	$("#submitButton").click(function(){
+	
+		if($("#email").val() == ""){
+		
+			fieldsMissing += "<br>Email";
+		}
+		
+		if($("#phone").val() == ""){
+		
+			fieldsMissing += "<br>Phone";
+		}
+		if($("#password").val() == ""){
+		
+			fieldsMissing += "<br>password";
+		}
+		if($("#confirmPassword").val() == ""){
+		
+			fieldsMissing += "<br>confirm password";
+		}
+		
+		if(fieldsMissing != ""){
+			errorMessage += "<p> the following fields are missing</p>" + fieldsMissing;
+		}
+	
+		
+		if(isEmail($("#email").val()) == false) {
+			
+			errorMessage+= "<p>Your email address is not valid </p>";
+		}
+		if ($.isNumeric($("#phone").val()) == false){
+				errorMessage += "<p> your phone number is not a number </p>";
+			
+			}
+			
+		if ($("#password").val() != $("#confirmPassword").val()) {
+			errorMessage += "<p> your passwords do not match</p>";
+		}
+			
+		if(errorMessage != ""){
+			$("#errorMessage").html(errorMessage);
+		}
+		else {
+		
+		$("#sucessMessage").show();
+		$("#errorMessage").hide();
+		
+		}
+	});
+		
+		
+	</script>
+			
+	</body>
+	
+</html>
